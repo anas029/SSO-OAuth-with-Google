@@ -1,0 +1,17 @@
+{
+  "name": "quick_hub",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "\"QuickHub: Your go-to platform for fast and convenient item lending and borrowing. Easily connect with others to share resources and get what you need, all in one swift exchange.\"",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon -w . -w .env.local",
+    "start": "node server.js"
+  },
+  "author": "anas029",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}

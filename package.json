@@ -2,7 +2,7 @@
   "name": "quick_hub",
   "version": "1.0.0",
   "type": "module",
-  "description": "\"QuickHub: Your go-to platform for fast and convenient item lending and borrowing. Easily connect with others to share resources and get what you need, all in one swift exchange.\"",
+  "description": "QuickHub: Your go-to platform for fast and convenient item lending and borrowing. Easily connect with others to share resources and get what you need, all in one swift exchange.",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon -w . -w .env.local",

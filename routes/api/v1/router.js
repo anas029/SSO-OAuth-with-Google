@@ -1,4 +1,8 @@
 import { Router } from "express";
+import google from "./google.js";
 const router = Router()
-router.get('/test', (_, res) => res.json({ message: "Test is successful" }))
+
+// API Endpoint: /api/v1
+router.use("/auth/google", google)
+
 export default router

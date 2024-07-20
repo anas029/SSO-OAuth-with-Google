@@ -1,19 +1,17 @@
 "use strict"
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
-import { config } from 'dotenv'
 import express from 'express'
 import morgan from 'morgan'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import v1Router from './routes/api/v1/router.js'
+import { DEBUG, PORT } from './configs/env.js'
+// import passport from 'passport'
 
-// load enviroment variables from .env.local file
-config({ path: ".env.local" })
+
 
 const app = express()
-const PORT = process.env.PORT ?? 3000
-const DEBUG = process.env.DEBUG == "true"
 
 // add CORS if in development (debug) mood
 if (DEBUG) {
@@ -24,6 +22,30 @@ app.use(morgan('dev'))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// var session = require('express-session');
+// var passport = require('passport');
+// Initialize Passport
+// app.use(passport.initialize());
+// app.use(session({
+//     secret: 'keyboard cat',
+//     resave: false,
+//     saveUninitialized: false,
+//     store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
+// }));
+// app.use(passport.authenticate('session'));
+
+// passport.serializeUser(function (user, cb) {
+//     process.nextTick(function () {
+//         cb(null, { id: user.id, username: user.username, name: user.name });
+//     });
+// });
+
+// passport.deserializeUser(function (user, cb) {
+//     process.nextTick(function () {
+//         return cb(null, user);
+//     });
+// });
+
 
 // API Routes
 app.use('/api/v1', v1Router)

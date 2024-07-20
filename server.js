@@ -6,7 +6,11 @@ import morgan from 'morgan'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import v1Router from './routes/api/v1/router.js'
-import { DEBUG, PORT } from './configs/env.js'
+import { DEBUG, PORT, secretKey } from './configs/env.js'
+import db from './configs/db.js'
+import cookieSession from 'cookie-session'
+import passport from 'passport'
+import regenerate from './auth/regenerate.js'
 
 
 const app = express()
@@ -20,7 +24,16 @@ app.use(morgan('dev'))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.use(cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [secretKey],
+    httpOnly: true,
+    sameSite: DEBUG ? 'none' : 'strict'
+}))
+// initilaize passport
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(regenerate())
 // API Routes
 app.use('/api/v1', v1Router)
 

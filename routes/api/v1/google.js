@@ -8,7 +8,7 @@ router.get("/login", passport.authenticate("google", { scope: ['profile', 'email
 router.get("/callback", passport.authenticate("google", {
     failureMessage: "Error",
     failureRedirect: "/falied",
-    successRedirect: "/success"
+    successRedirect: "google.com"
 }))
 
 export default router

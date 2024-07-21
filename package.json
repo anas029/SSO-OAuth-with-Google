@@ -1,16 +1,19 @@
 {
-  "name": "quick_hub",
+  "name": "SSO",
   "version": "1.0.0",
   "type": "module",
-  "description": "QuickHub: Your go-to platform for fast and convenient item lending and borrowing. Easily connect with others to share resources and get what you need, all in one swift exchange.",
+  "description": "A template repository for Single Sign-On (SSO) with Google OAuth, utilizing cookies for session management. Built on the MERN (MongoDB, Express.js, React.js, Node.js) stack.",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon -w . -w .env.local",
-    "start": "node server.js"
+    "dev": "nodemon -w . -w .env.local --ignore client",
+    "start": "node server.js",
+    "eslint": "npx eslint .",
+    "build": "rm -rf ./build && cd client && npm run build && mv ./build ../"
   },
   "author": "anas029",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.7.2",
     "cookie-parser": "^1.4.6",
     "cookie-session": "^2.1.0",
     "cors": "^2.8.5",
@@ -20,5 +23,12 @@
     "morgan": "^1.10.0",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.7.0",
+    "eslint": "^9.7.0",
+    "globals": "^15.8.0",
+    "nodemon": "^3.1.0"
+
   }
 }

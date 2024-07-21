@@ -13,8 +13,6 @@ const regenerate = () => {
             }
         }
         next()
-
     }
 }
-
 export default regenerate

@@ -6,7 +6,7 @@ import morgan from 'morgan'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import v1Router from './routes/api/v1/router.js'
-import { DEBUG, PORT, secretKey } from './configs/env.js'
+import { CORS_WHITELIST, DEBUG, maxAge, PORT, secretKeys } from './configs/env.js'
 import db from './configs/db.js'
 import cookieSession from 'cookie-session'
 import passport from 'passport'
@@ -17,23 +17,34 @@ const app = express()
 
 // add CORS if in development (debug) mood
 if (DEBUG) {
-    app.use(cors())
+    app.use(cors({
+        origin: CORS_WHITELIST,
+        credentials: true
+    }))
 }
+
 // logger
 app.use(morgan('dev'))
+
+// parse data
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// cookie session middleware to handle session management
 app.use(cookieSession({
-    maxAge: 24 * 60 * 60 * 1000,
-    keys: [secretKey],
+    maxAge: maxAge * 24 * 60 * 60 * 1000,
+    keys: secretKeys,
     httpOnly: true,
-    sameSite: DEBUG ? 'none' : 'strict'
+    sameSite: DEBUG ? false : 'strict',
+    secure: !DEBUG
 }))
+
 // initilaize passport
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(regenerate())
+
 // API Routes
 app.use('/api/v1', v1Router)
 
@@ -45,6 +56,6 @@ app.get('/*', (_, res) => {
 });
 
 
-// catch 404 
+// catch 404
 app.use((_, res) => res.status(404).json({ message: "Requested page does not exist." }));
 app.listen(PORT, () => console.info(`Server is running on http://localhost:${PORT}`))

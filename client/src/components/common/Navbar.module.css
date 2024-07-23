@@ -1,0 +1,17 @@
+.header {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+
+    /* background-color: red; */
+}
+
+.nav {
+    margin-right: auto;
+}
+
+.ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}

@@ -6,13 +6,12 @@ const ProtectedLayout = () => {
     const location = useLocation()
     const isAuthenticated = useSelector(selectIsUserAuthenticated)
     const isLoading = useSelector(selectIsUserLoading)
-
     return (
         isLoading
             ? <p>Please wait ...</p>
             : isAuthenticated
                 ? <Outlet />
-                : <Navigate to="/auth/login" state={{ from: location }} replace />
+                : <Navigate to={`/auth/login?callback=${location.pathname}`} state={{ from: location }} replace />
     )
 }
 

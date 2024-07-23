@@ -38,14 +38,14 @@ const router = () => {
                             path: "/protected",
                             element: <Protected />
                         },
-                    ]
-                },
-                {
-                    element: <AdminLayout />,
-                    children: [
                         {
-                            path: "/admin/dashboard",
-                            element: <AdminDashboard />,
+                            element: <AdminLayout />,
+                            children: [
+                                {
+                                    path: "/admin/dashboard",
+                                    element: <AdminDashboard />,
+                                },
+                            ]
                         },
                     ]
                 },

@@ -19,8 +19,7 @@ export const logOut = createAsyncThunk(
             const response = await Client.post('/auth/google/logout', {});
             return response.data;
         } catch (error) {
-            console.log(error);
-            // return rejectWithValue(error.response.data);
+            return rejectWithValue(error.response.data);
         }
     }
 );
@@ -63,7 +62,7 @@ export const authSlice = createSlice({
             .addCase(userProfile.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
-                state.isAuthenticated = true;
+                state.isAuthenticated = false;
                 state.user = null;
             })
             .addCase(logOut.pending, (state) => {
@@ -73,6 +72,12 @@ export const authSlice = createSlice({
             .addCase(logOut.fulfilled, (state) => {
                 state.isLoading = false;
                 state.error = null;
+                state.isAuthenticated = false;
+                state.user = null;
+            })
+            .addCase(logOut.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
                 state.isAuthenticated = false;
                 state.user = null;
             });

@@ -14,7 +14,7 @@ const GoogleLoginURL = `${BASE_URL}/auth/google/login`
 
 const useLogin = () => {
     const navigate = useNavigate()
-    const login = (url) => {
+    const login = (done) => {
         let timer
         let loginWindow
         if (timer) {
@@ -27,8 +27,8 @@ const useLogin = () => {
         if (loginWindow) {
             timer = setInterval(() => {
                 if (loginWindow.closed) {
-                    if (url) {
-                        navigate(url);
+                    if (done) {
+                        done();
                     }
                     clearInterval(timer)
                 }

@@ -8,11 +8,9 @@ const Logout = () => {
     }
 
     return (
-        <>
-            <button onClick={signout}>
-                Logout
-            </button>
-        </>
+        <button onClick={signout}>
+            Logout
+        </button>
     )
 }
 
